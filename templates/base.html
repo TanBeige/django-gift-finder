@@ -11,10 +11,20 @@
         p {color:blue;}
 
         #gift_form_table {
-            margin: auto
+            margin: auto;
+            border-collapse: unset
         }
         #submit_button {
             width: 100%
+        }
+
+        .list-image {
+            object-fit: cover;
+            border-radius: 4px
+        }
+
+        #products-table {
+            margin: 1em
         }
 
     </style>
@@ -26,13 +36,32 @@
 </head>
 <body>
     {% block content  %}
-    <h1 style="text-align: center">Gift Thinker</h1>
+    <h1 style="text-align: center; margin: 0.5em">Gift Thinker</h1>
 
-    <form action="" method="get" >
+    <form action="" id="gift" method="get" >
         <table id="gift_form_table">
             {{form.as_table}}
+            <tr>
+                <td colspan="2">
+                    <button type="submit" form="gift" value="Submit">Submit</button>
+                </td>
+            </tr>
         </table>
+
     </form>
+
+    <div id="products-table">
+        <ul>
+            <li>
+                <img class="list-image" src="https://secure.img1-fg.wfcdn.com/im/20613168/resize-h800-w800%5Ecompr-r85/6832/68326048/Skye+Oriental+Terracotta+Area+Rug.jpg" width="300" height="200" />
+                <h2>Title</h2>
+                <p>Price: $19.99</p>
+                <p>Description.....</p>
+            </li>
+        </ul>
+    </div>
+
+
     {% endblock content %}
 </body>
 </html>
