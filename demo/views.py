@@ -1,3 +1,5 @@
+
+
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render
@@ -11,17 +13,17 @@ def home(request):
     # Loads the HTML file base.html
 
     # Grabs the form model from forms.py and sends it to the base.html template
-    form = GiftForm()
-
-    # When someone selects the filters and clicks "submit" This if statement runs
     if request.method == 'GET':
+        form = GiftForm()
+    # When someone selects the filters and clicks "submit" This if statement runs
+    if request.method == 'POST':
         print(request.GET)
 
         # Gets the input parameters from the link "?hobby=...age=...price=..."
         hobby = request.GET.get('hobby')
         age = request.GET.get('age')
         price = request.GET.get('price')
-
+        
         print(hobby)
         print(AGE_RANGE[int(age)])
         print(PRICE_RANGE[int(price)])
@@ -43,16 +45,17 @@ def home(request):
 
         # Call Rainforest API to get products
         # make the http GET request to Rainforest API
-        ## api_result = requests.get('https://api.rainforestapi.com/request', params)
+        api_result = requests.get('https://api.rainforestapi.com/request', params)
 
         # print the JSON response from Rainforest A:PI
-        ## json_results = api_result.json()
+        json_results = api_result.json()
         products = []
-        ## products = json_results['search_results']
+        products = json_results['search_results']
 
-        ## for product in products:
-        ##     print(product)
+        for product in products:
+            print(product)
 
         return render(request, "base.html", {'form': form, 'products': products})
 
     return render(request, "base.html", {'form': form})
+
