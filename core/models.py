@@ -1,4 +1,4 @@
-
+from django.db import models
 # Create your models here.
 class FormInputs(models.Model):
     category_Hobby = models.IntegerField()

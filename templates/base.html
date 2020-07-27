@@ -18,13 +18,13 @@
             width: 100%
         }
 
-        .list-image {
-            object-fit: cover;
-            border-radius: 4px
+        #products-container {
+            margin-top: 2em;
         }
 
         #products-table {
-            margin: 1em
+            margin: 1em;
+            text-align: center;
         }
 
     </style>
@@ -47,19 +47,22 @@
                 </td>
             </tr>
         </table>
-
     </form>
 
-    <div id="products-table">
-        <ul>
-            <li>
-                <img class="list-image" src="https://secure.img1-fg.wfcdn.com/im/20613168/resize-h800-w800%5Ecompr-r85/6832/68326048/Skye+Oriental+Terracotta+Area+Rug.jpg" width="300" height="200" />
-                <h2>Title</h2>
-                <p>Price: $19.99</p>
-                <p>Description.....</p>
-            </li>
-        </ul>
+    <div id="products-container">
+        {% for product in products %}
+            <a href={{product.link}} target="_blank">
+                <div id="products-table">
+                    <img class="list-image" src={{product.image}} width="300" height="200" />
+                    <h2>{{ product.title }}</h2>
+
+                    <p>Rating: {{product.rating}} stars</p>
+                    <p>out of {{product.ratings_total}} ratings</p>
+                </div>
+            </a>
+        {% endfor %}
     </div>
+
 
 
     {% endblock content %}

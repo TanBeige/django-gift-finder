@@ -2,24 +2,57 @@ from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render
 from .forms import GiftForm
+import requests
+import json
+from constants import HOBBIES, AGE_RANGE, PRICE_RANGE
 
 
 def home(request):
     # Loads the HTML file base.html
 
-    print(request.GET)
+    # Grabs the form model from forms.py and sends it to the base.html template
+    form = GiftForm()
 
-    form=GiftForm()
+    # When someone selects the filters and clicks "submit" This if statement runs
+    if request.method == 'GET':
+        print(request.GET)
+
+        # Gets the input parameters from the link "?hobby=...age=...price=..."
+        hobby = request.GET.get('hobby')
+        age = request.GET.get('age')
+        price = request.GET.get('price')
+
+        print(hobby)
+        print(AGE_RANGE[int(age)])
+        print(PRICE_RANGE[int(price)])
+
+        # set up the request parameters
+        params = {
+            'api_key': '7CBC2DADFAC5428BB98CF08115E3F9DC',
+            'type': 'search',
+            'amazon_domain': 'amazon.com',
+            'associate_id': 'gift-finder-django-20',
+            'customer_location': 'us',
+            'language': 'en_US',
+            'output': 'json',
+            'sort_by': 'average_review',
+            'search_term': hobby,
+        }
+        # Since we have a limited amount of API usage, I have commented out the get requests
+        # If you want API to work, uncomment the lines with 2 #'s
+
+        # Call Rainforest API to get products
+        # make the http GET request to Rainforest API
+        ## api_result = requests.get('https://api.rainforestapi.com/request', params)
+
+        # print the JSON response from Rainforest API
+        ## json_results = api_result.json()
+        products = []
+        ## products = json_results['search_results']
+
+        ## for product in products:
+        ##     print(product)
+
+        return render(request, "base.html", {'form': form, 'products': products})
 
     return render(request, "base.html", {'form': form})
-
-
-
-
-def results(request, question_id):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response % question_id)
-
-
-def vote(request, question_id):
-    return HttpResponse("You're voting on question %s." % question_id)
