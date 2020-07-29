@@ -10,12 +10,17 @@ class FormInputs(models.Model):
 
 class Product(models.Model):
     form_input_id = models.ForeignKey(FormInputs, on_delete=models.CASCADE)
-    amazonUrl = models.CharField(max_length=500)
-    giftName = models.CharField(max_length=500)
-    giftASIN = models.CharField(max_length=10)
+    link = models.CharField(max_length=500)
+    title = models.CharField(max_length=500)
+    asin = models.CharField(max_length=10)
     # giftDescription = models.CharField(max_length=1000)
-    giftImageUrl = models.CharField(max_length=500)
+    image = models.CharField(max_length=500)
     giftTimestamp = models.DateTimeField(auto_now=True, auto_created=True)
 
-    def __str__(self):
-        return self.giftName
+    def __iter__(self):
+        return {
+            self.title,
+            self.link,
+            self.asin,
+            self.image
+        }
