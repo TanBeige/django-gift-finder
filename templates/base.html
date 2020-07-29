@@ -9,7 +9,6 @@
     <!--Styling for Page-->
     <style>
         p {color:#00008B	;}
-
         #gift_form_table {
             margin: auto;
             border-collapse: unset
@@ -36,14 +35,16 @@
 </head>
 <body>
     {% block content  %}
-    <h1 style="text-align: center; margin: 0.5em">Find the best gift possible below!</h1>
+    <h1 style="text-align: center; margin: 0.5em ">Find the best gift possible below!</h1>
 
     <form action="" id="gift" method="get" >
         <table id="gift_form_table">
             {{form.as_table}}
             <tr>
                 <td colspan="2">
-                    <button type="submit" form="gift" value="Submit">Submit</button>
+
+                    <!--  <button type="submit" form="gift" value="Submit">Submit</button> -->
+                    <input type="submit" form="gift" value="Find a Gift!" style="background-color:#ff803a;border:1px solid #ff803a;border-radius:15px;color:#ffffff;display:inline-block;font-family:'Montserrat',Arial, Geneva, sans-serif;font-size:14px;font-weight:700;line-height:30px;text-align:center;text-decoration:none;width:220px;-webkit-text-size-adjust:none;mso-hide:all;" />
                 </td>
             </tr>
         </table>
