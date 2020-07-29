@@ -1,4 +1,6 @@
 from django.db import models
+
+
 # Create your models here.
 class FormInputs(models.Model):
     category_Hobby = models.IntegerField()
@@ -7,7 +9,6 @@ class FormInputs(models.Model):
 
 
 class Product(models.Model):
-
     form_input_id = models.ForeignKey(FormInputs, on_delete=models.CASCADE)
     amazonUrl = models.CharField(max_length=500)
     giftName = models.CharField(max_length=100)
@@ -15,3 +16,6 @@ class Product(models.Model):
     giftDescription = models.CharField(max_length=1000)
     giftImageUrl = models.CharField(max_length=500)
     giftTimestamp = models.DateTimeField(auto_now=True, auto_created=True)
+
+    def __str__(self):
+        return self.giftName

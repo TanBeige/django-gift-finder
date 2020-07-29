@@ -1,5 +1,3 @@
-
-
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render
@@ -7,6 +5,7 @@ from .forms import GiftForm
 import requests
 import json
 from constants import HOBBIES, AGE_RANGE, PRICE_RANGE
+from demo.models import Product, FormInputs
 
 
 def home(request):
@@ -23,6 +22,9 @@ def home(request):
         hobby = request.GET.get('hobby')
         age = request.GET.get('age')
         price = request.GET.get('price')
+
+        database_form_entry = FormInputs(category_Hobby=hobby, category_ageRange=age, category_priceRange=price)
+        database_form_entry.save()
         
         print(hobby)
         print(AGE_RANGE[int(age)])
