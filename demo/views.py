@@ -12,19 +12,25 @@ def home(request):
     # Loads the HTML file base.html
 
     # Grabs the form model from forms.py and sends it to the base.html template
-    if request.method == 'GET':
-        form = GiftForm()
+    form = GiftForm()
+
     # When someone selects the filters and clicks "submit" This if statement runs
-    if request.method == 'POST':
-        print(request.GET)
+    if request.method == 'GET':
+
 
         # Gets the input parameters from the link "?hobby=...age=...price=..."
         hobby = request.GET.get('hobby')
         age = request.GET.get('age')
         price = request.GET.get('price')
 
-        database_form_entry = FormInputs(category_Hobby=hobby, category_ageRange=age, category_priceRange=price)
-        database_form_entry.save()
+        #If no parameters, just return normal
+        if hobby == None and age == None and price == None:
+            return render(request, "base.html", {'form': form})
+
+        print(hobby, age, price)
+
+        # database_form_entry = FormInputs(category_Hobby=hobby, category_ageRange=age, category_priceRange=price)
+        # database_form_entry.save()
         
         print(hobby)
         print(AGE_RANGE[int(age)])
@@ -47,18 +53,18 @@ def home(request):
 
         # Call Rainforest API to get products
         # make the http GET request to Rainforest API
-        # api_result = requests.get('https://api.rainforestapi.com/request', params)
+        api_result = requests.get('https://api.rainforestapi.com/request', params)
 
         # print the JSON response from Rainforest A:PI
-        # json_results = api_result.json()
-        products = []
-        # products = json_results['search_results']
+        json_results = api_result.json()
+        # products = []
+        products = json_results['search_results']
 
-        for product in products:
-            print(product)
-            database_product_entry = Product(form_input_id=database_form_entry, giftName=products['title'], giftASIN=products['asin'],
-                                             giftImageUrl=products['image'], amazonUrl=products['link'])
-            database_product_entry.save()
+        # for product in products:
+        #     print(product)
+        #     database_product_entry = Product(form_input_id=database_form_entry, giftName=products['title'], giftASIN=products['asin'],
+        #                                      giftImageUrl=products['image'], amazonUrl=products['link'])
+        #     database_product_entry.save()
 
         return render(request, "base.html", {'form': form, 'products': products})
 
