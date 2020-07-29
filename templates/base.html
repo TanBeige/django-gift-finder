@@ -8,7 +8,7 @@
 
     <!--Styling for Page-->
     <style>
-        p {color:blue;}
+        p {color:#00008B	;}
 
         #gift_form_table {
             margin: auto;
@@ -36,7 +36,7 @@
 </head>
 <body>
     {% block content  %}
-    <h1 style="text-align: center; margin: 0.5em">Gift Thinker</h1>
+    <h1 style="text-align: center; margin: 0.5em">Find the best gift possible below!</h1>
 
     <form action="" id="gift" method="get" >
         <table id="gift_form_table">
@@ -53,11 +53,12 @@
         {% for product in products %}
             <a href={{product.link}} target="_blank">
                 <div id="products-table">
-                    <img class="list-image" src={{product.image}} width="300" height="200" />
+                    <img class="list-image" src={{product.image}} width="30%" height="40%" />
+                    <hr style="height:2px;border-width:0;color:black;background-color:black">
                     <h2>{{ product.title }}</h2>
-
-                    <p>Rating: {{product.rating}} stars</p>
-                    <p>out of {{product.ratings_total}} ratings</p>
+                    <p>Rating: {{product.rating}} stars out of {{product.ratings_total}} ratings</p>
+                    <p></p>
+                    <hr style="height:2px;border-width:0;color:black;background-color:black">
                 </div>
             </a>
         {% endfor %}
