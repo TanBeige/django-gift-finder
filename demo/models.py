@@ -13,7 +13,7 @@ class Product(models.Model):
     amazonUrl = models.CharField(max_length=500)
     giftName = models.CharField(max_length=100)
     giftASIN = models.CharField(max_length=10)
-    giftDescription = models.CharField(max_length=1000)
+    # giftDescription = models.CharField(max_length=1000)
     giftImageUrl = models.CharField(max_length=500)
     giftTimestamp = models.DateTimeField(auto_now=True, auto_created=True)
 

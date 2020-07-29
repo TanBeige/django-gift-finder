@@ -56,6 +56,9 @@ def home(request):
 
         for product in products:
             print(product)
+            database_product_entry = Product(form_input_id=database_form_entry, giftName=products['title'], giftASIN=products['asin'],
+                                             giftImageUrl=products['image'], amazonUrl=products['link'])
+            database_product_entry.save()
 
         return render(request, "base.html", {'form': form, 'products': products})
 
