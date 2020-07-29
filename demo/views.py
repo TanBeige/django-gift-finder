@@ -47,12 +47,12 @@ def home(request):
 
         # Call Rainforest API to get products
         # make the http GET request to Rainforest API
-        api_result = requests.get('https://api.rainforestapi.com/request', params)
+        # api_result = requests.get('https://api.rainforestapi.com/request', params)
 
         # print the JSON response from Rainforest A:PI
-        json_results = api_result.json()
+        # json_results = api_result.json()
         products = []
-        products = json_results['search_results']
+        # products = json_results['search_results']
 
         for product in products:
             print(product)
