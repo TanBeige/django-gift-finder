@@ -5,7 +5,23 @@ HOBBIES = [
     ('gaming', 'Gaming'),
     ('outdoors', 'Outdoors'),
     ('pets', 'Pets'),
+    ('fishing', 'Fishing'),
+    ('cooking', 'Cooking'),
+    ('grilling', 'Grilling'),
+    ('beer wine liquor', 'Beer/Wine/Liquer'),
+    ('drawing/graphic art', 'Drawing/Graphic Art'),
+    ('reading', 'Reading'),
+    ('smoking', 'Smoking'),
+    ('music', 'Music'),
+    ('swimming', 'Swimming'),
+    ('working out', 'Working Out'),
+    ('comics', 'Comics'),
+    ('movies', 'Movies'),
+    ('video games', 'Video Games'),
+    ('camping', 'Camping'),
+    ('hunting', 'Hunting'),
 ]
+
 AGE_RANGE = [
     (0, 'Select'),
     (1, '0-6 Years Old'),

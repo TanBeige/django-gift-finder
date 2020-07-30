@@ -8,10 +8,8 @@ from constants import HOBBIES, AGE_RANGE, PRICE_RANGE, SORT_BY
 from demo.models import Product, FormInputs
 import sqlite3
 
-
 def home(request):
     # Loads the HTML file base.html
-
     # Grabs the form model from forms.py and sends it to the base.html template
     form = GiftForm()
 
@@ -38,9 +36,13 @@ def home(request):
 
         formatted_sort_by = SORT_BY[int(sort_by)][1].lower().replace(" ", "_")
 
-        print(formatted_sort_by)
+        print(hobby)
 
+        age_range_input = AGE_RANGE[int(age)][1]
+        if (int(age) == 0):
+            age_range_input = ""
 
+        print(age_range_input)
         # set up the request parameters
         params = {
             'api_key': '7CBC2DADFAC5428BB98CF08115E3F9DC',
@@ -52,7 +54,7 @@ def home(request):
             'output': 'json',
             'sort_by': formatted_sort_by,
             # Age range grabs pair from list, then grabs value from pair ([1])
-            'search_term': f"{hobby} {AGE_RANGE[int(age)][1]}"
+            'search_term': f"{hobby} {age_range_input}"
         }
 
         # Call Rainforest API to get products
