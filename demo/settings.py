@@ -1,5 +1,7 @@
 import os
 import django_heroku
+import dj_database_url
+import dotenv
 
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
 
@@ -7,6 +9,11 @@ DEBUG = True
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '-05sgp9!deq=q1nltm@^^2cc+v29i(tyybv3v2t77qi66czazj'
 ALLOWED_HOSTS = []
+
+# This is new:
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -60,12 +67,19 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, 'db.sqlite3')
-    }
-}
+
+# old database settings without postgresql
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": os.path.join(BASE_DIR, 'db.sqlite3')
+#     }
+# }
+
+# New Heorku Postgresql settings
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+
 
 if ENVIRONMENT == 'production':
     DEBUG = False
@@ -81,3 +95,6 @@ if ENVIRONMENT == 'production':
 
 # Activate Django-Heroku. - for heroku
 django_heroku.settings(locals())
+
+# Remove need for SSL in database
+del DATABASES['default']['OPTIONS']['sslmode']
