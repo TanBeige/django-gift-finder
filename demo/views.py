@@ -23,15 +23,18 @@ def home(request):
         age = request.GET.get('age')
         price = request.GET.get('price')
 
-        # If no parameters, just return normal homepage w/ database info
+        # If no parameters, just return normal homepage w/ last 30 recorded products
         if (hobby is None and age is None and price is None) or (hobby == 'none' and age == '0' and price == '0'):
+            # Grabs the last 30 products in Products table
             all = Product.objects.order_by('-id')[:30]
-            print(all)
             products = all
+
+            # Displays products on homepage
             return render(request, "base.html", {'form': form, 'products': products})
 
         database_form_entry = FormInputs(category_Hobby=hobby, category_ageRange=age, category_priceRange=price)
         database_form_entry.save()
+
 
         # set up the request parameters
         params = {
@@ -43,10 +46,9 @@ def home(request):
             'language': 'en_US',
             'output': 'json',
             'sort_by': 'average_review',
-            'search_term': hobby,
+            # Age range grabs pair from list, then grabs value from pair ([1])
+            'search_term': f"{hobby} {AGE_RANGE[int(age)][1]}"
         }
-        # Since we have a limited amount of API usage, I have commented out the get requests
-        # If you want API to work, uncomment the lines with 2 #'s
 
         # Call Rainforest API to get products
         # make the http GET request to Rainforest API
