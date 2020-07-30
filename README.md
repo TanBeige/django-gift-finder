@@ -14,7 +14,7 @@ Can’t think of gift ideas? Try our gift idea generator. Input 3 things they li
 
 
 
-------------
+
 ## Notes
 
 * https://rapidapi.com/
@@ -30,11 +30,11 @@ tracker.gg/developers
   * This guy did something similar to that idea….idk if we can get an Amazon Web Services acct though, which seems to be needed for this
 * https://www.scrapehero.com/tutorial-how-to-scrape-amazon-product-details-using-python-and-selectorlib/
 
------------
-Stack Ideas
-Django
-MongoDB (NonRelational Database for simplicity)
-Heroku Hosting 
+
+## Libraries and Resources
+* Django
+* MongoDB (NonRelational Database for simplicity)
+* Heroku Hosting 
 Pros: Free at first, extremely easy to use, Scalable 
 Cons: Gets expensive if website traffic is really high(not a problem/we gettin money at this point)
 
