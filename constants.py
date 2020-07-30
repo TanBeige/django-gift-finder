@@ -20,6 +20,8 @@ HOBBIES = [
     ('video games', 'Video Games'),
     ('camping', 'Camping'),
     ('hunting', 'Hunting'),
+    ('hiking', 'Hiking'),
+    ('gardening', 'Gardening'),
 ]
 
 AGE_RANGE = [
