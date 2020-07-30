@@ -1,3 +1,1 @@
-python manage.py makemigrations demo
-python manage.py migrate
-python manage.py runserver:
+web: gunicorn demo.wsgi --log-file -
