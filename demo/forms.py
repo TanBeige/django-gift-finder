@@ -1,5 +1,5 @@
 from django import forms
-from constants import HOBBIES, AGE_RANGE, PRICE_RANGE
+from constants import HOBBIES, AGE_RANGE, PRICE_RANGE, SORT_BY
 #
 # HOBBIES = [
 #     ('gaming', 'Gaming'),
@@ -27,4 +27,4 @@ from constants import HOBBIES, AGE_RANGE, PRICE_RANGE
 class GiftForm(forms.Form):
     hobby = forms.CharField(label='Hobby', widget=forms.Select(choices=HOBBIES))
     age = forms.CharField(label='Age Range', widget=forms.Select(choices=AGE_RANGE))
-    price = forms.CharField(label='Price', widget=forms.Select(choices=PRICE_RANGE))
+    sort_by = forms.CharField(label='Sort By', widget=forms.Select(choices=SORT_BY))

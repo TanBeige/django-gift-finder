@@ -24,3 +24,11 @@ PRICE_RANGE = [
     (3, '$$$'),
     (4, '$$$$'),
 ]
+
+SORT_BY = [
+    (0, 'Price Low to High'),
+    (1, 'Price High to Low'),
+    (2, 'Featured'),
+    (3, 'Average Review'),
+    (4, 'Most Recent'),
+]

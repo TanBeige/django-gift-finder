@@ -4,7 +4,7 @@ from django.shortcuts import render
 from .forms import GiftForm
 import requests
 import json
-from constants import HOBBIES, AGE_RANGE, PRICE_RANGE
+from constants import HOBBIES, AGE_RANGE, PRICE_RANGE, SORT_BY
 from demo.models import Product, FormInputs
 import sqlite3
 
@@ -21,10 +21,11 @@ def home(request):
         # Gets the input parameters from the link "?hobby=...age=...price=..."
         hobby = request.GET.get('hobby')
         age = request.GET.get('age')
-        price = request.GET.get('price')
+        # price = request.GET.get('price')
+        sort_by = request.GET.get('sort_by')
 
         # If no parameters, just return normal homepage w/ last 30 recorded products
-        if (hobby is None and age is None and price is None) or (hobby == 'none' and age == '0' and price == '0'):
+        if (hobby is None and age is None and sort_by is None) or (hobby == 'none' and age == '0' and sort_by == '0'):
             # Grabs the last 30 products in Products table
             all = Product.objects.order_by('-id')[:30]
             products = all
@@ -32,8 +33,12 @@ def home(request):
             # Displays products on homepage
             return render(request, "base.html", {'form': form, 'products': products})
 
-        database_form_entry = FormInputs(category_Hobby=hobby, category_ageRange=age, category_priceRange=price)
+        database_form_entry = FormInputs(category_Hobby=hobby, category_ageRange=age, category_priceRange=sort_by)
         database_form_entry.save()
+
+        formatted_sort_by = SORT_BY[int(sort_by)][1].lower().replace(" ", "_")
+
+        print(formatted_sort_by)
 
 
         # set up the request parameters
@@ -45,7 +50,7 @@ def home(request):
             'customer_location': 'us',
             'language': 'en_US',
             'output': 'json',
-            'sort_by': 'average_review',
+            'sort_by': formatted_sort_by,
             # Age range grabs pair from list, then grabs value from pair ([1])
             'search_term': f"{hobby} {AGE_RANGE[int(age)][1]}"
         }
